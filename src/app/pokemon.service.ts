@@ -8,8 +8,18 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class PokemonService {
+  private ListOfPokemons;
+  
+  public set SetListOfPokemons(v) {
+    this.ListOfPokemons = v;
+  }
+  public get GetListOfPokemons(){
+    return this.ListOfPokemons;
+  }
+  
 
-  private dataUrl = 'api/heroes';  // URL to web api
+  // private dataUrl = 'api/pokemons';  // URL to web api
+  private dataUrl = 'https://pokeapi.co/api/v2/';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,11 +29,8 @@ export class PokemonService {
     private http: HttpClient) { }
 
   /** GET heroes from the server */
-  getPokemons (): Observable<any[]> {
-    return this.http.get<any[]>(this.dataUrl)
-      .pipe(
-        catchError(this.handleError<any[]>('getPokemons', []))
-      );
+  getPokemons (): Observable<any> {
+    return this.http.get<any[]>(this.dataUrl + 'pokemon?limit=964')      
   }
 
   /** GET hero by id. Return `undefined` when id not found */
@@ -41,17 +48,6 @@ export class PokemonService {
     const url = `${this.dataUrl}/${name}`;
     return this.http.get<any>(url).pipe(
       catchError(this.handleError<any>(`getPokemon id=${name}`))
-    );
-  }
-
-  /* GET heroes whose name contains search term */
-  searchPokemons(term: string): Observable<any[]> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
-    return this.http.get<any[]>(`${this.dataUrl}/?name=${term}`).pipe(
-      catchError(this.handleError<any[]>('searchPokemons', []))
     );
   }
 

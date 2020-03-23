@@ -16,7 +16,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getPokemons(): void {
-    this.pokemonService.getPokemons()
-      .subscribe(pokemons => this.pokemons = pokemons.slice(1, 5));
+    if(this.pokemonService.GetListOfPokemons != undefined){
+      this.pokemons = this.pokemonService.GetListOfPokemons;
+    }else{
+      this.pokemonService.getPokemons().subscribe(pokemons => {
+        this.pokemons = pokemons.results.slice(1,5);
+        this.pokemonService.SetListOfPokemons = pokemons.results;
+      });
+    }
   }
 }

@@ -1,10 +1,10 @@
 <div id="search-component">
   <h4><label for="search-box">Pokemon Search</label></h4>
 
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+  <input #searchBox id="search-box" (input)="filterItem(searchBox.value)" />
 
   <ul class="search-result">
-    <li *ngFor="let pokemon of pokemons$ | async" >
+    <li *ngFor="let pokemon of filteredPokemons" >
       <a routerLink="/detail/{{pokemon.name}}">
         {{pokemon.name}}
       </a>

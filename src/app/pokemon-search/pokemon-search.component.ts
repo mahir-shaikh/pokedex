@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 
 import {
-   debounceTime, distinctUntilChanged, switchMap
- } from 'rxjs/operators';
+  debounceTime, distinctUntilChanged, switchMap
+} from 'rxjs/operators';
 
 import { PokemonService } from '../pokemon.service';
 
 @Component({
   selector: 'app-pokemon-search',
   templateUrl: './pokemon-search.component.html',
-  styleUrls: [ './pokemon-search.component.css' ]
+  styleUrls: ['./pokemon-search.component.css']
 })
 export class PokemonSearchComponent implements OnInit {
-  pokemons$: Observable<any[]>;
+  filteredPokemons = [];
+  pokemons = []
   private searchTerms = new Subject<string>();
 
-  constructor(private pokemonService: PokemonService) {}
+  constructor(private pokemonService: PokemonService) { }
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -25,15 +26,29 @@ export class PokemonSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pokemons$ = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
-      debounceTime(300),
-
-      // ignore new term if same as previous term
-      distinctUntilChanged(),
-
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.pokemonService.searchPokemons(term)),
-    );
+    this.getPokemons()
   }
+
+  filterItem(value) {
+    if (!value) {
+      this.filteredPokemons = []
+    } // when nothing has typed
+
+    
+    this.filteredPokemons = Object.assign([], this.pokemons).filter(
+      item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
+    )
+  }
+
+  getPokemons(): void {
+    if(this.pokemonService.GetListOfPokemons != undefined){
+      this.pokemons = this.pokemonService.GetListOfPokemons;
+    }else{
+      this.pokemonService.getPokemons().subscribe(pokemons => {
+        this.pokemons = pokemons.results;
+        this.pokemonService.SetListOfPokemons = pokemons.results;
+      });
+    }
+  }
+
 }
