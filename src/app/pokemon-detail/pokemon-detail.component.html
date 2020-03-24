@@ -1,36 +1,83 @@
+<button (click)="goBack()">go back</button>
 <div *ngIf="pokemon">
   <h2>{{pokemon.name | uppercase}} Details</h2>
-  <button (click)="goBack()">go back</button>
-  <div>
-    <img [src]="pokemon.sprites.front_default">
-    <label>Name: {{pokemon.name}}</label>
-    <label>Weight: {{pokemon.weight}}</label>
-    <label>Height: {{pokemon.height}}</label>
-    <label>Base Experience: {{pokemon.base_experience}}</label>
 
-
-    Stats:
-    <div class="row">
-      <div class="col">Name</div>
-      <div class="col">Stat</div>
+  <div class="card-wrapper">
+    <div class="top-section">
+      <h2 class="pokemon-name">
+        {{pokemon.name}}
+      </h2>
+      <div class="type-container">
+        <span class="badge badge-pill badge-dark" *ngFor="let typeObj of pokemon.types">
+          {{typeObj?.type?.name}}
+        </span>
+      </div>
+      <div class="image-container">
+        <img class="image" [src]="pokemon.sprites.front_default">
+      </div>
     </div>
-    <div class="row" *ngFor="let statObj of pokemon.stats">
-      <div class="col">{{statObj?.stat?.name}}</div>
-      <div class="col">{{statObj?.base_stat}}</div>
+    <div class="bottom-section">
+      <tabset [justified]="true">
+        <tab heading="About">
+          <div class="tab-data">
+            <div class="row data-row">
+              <div class="col col-6 data-label">
+                Weight
+              </div>
+              <div class="col col-6 data-value">
+                {{pokemon.weight}}
+              </div>
+            </div>
+
+            <div class="row data-row">
+              <div class="col col-6 data-label">
+                Height
+              </div>
+              <div class="col col-6 data-value">
+                {{pokemon.height}}
+              </div>
+            </div>
+
+            <div class="row data-row">
+              <div class="col col-6 data-label">
+                Base Experience
+              </div>
+              <div class="col col-6 data-value">
+                {{pokemon.base_experience}}
+              </div>
+            </div>
+
+            <div class="row data-row">
+              <div class="col col-12 data-header">
+                Abilities
+              </div>
+              <ul>
+                <li class="col col-12 data-value" *ngFor="let abilityObj of pokemon.abilities">
+                  {{abilityObj?.ability?.name}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </tab>
+        <tab heading="Stats">
+          <div class="tab-data">
+            <div class="row stat-row" *ngFor="let statObj of pokemon.stats">
+              <div class="col data-label">{{statObj?.stat?.name}}</div>
+              <div class="col data-value">{{statObj?.base_stat}}</div>
+              <div class="col data-chart">
+                <progressbar max="100" 
+                [value]="statObj?.base_stat" 
+                [type]="statObj?.base_stat <= 35 ? 'danger' : statObj?.base_stat <= 75 ? 'warning' :  'success'" 
+                [striped]="true" [animate]="true"></progressbar>
+              </div>
+            </div>
+          </div>
+        </tab>
+      </tabset>
     </div>
-
-    Abilities:
-    <ul>
-      <li *ngFor="let abilityObj of pokemon.abilities">
-        {{abilityObj?.ability?.name}}
-      </li>
-    </ul>
-
-    Type:
-    <ul>
-      <li *ngFor="let typeObj of pokemon.types">
-        {{typeObj?.type?.name}}
-      </li>
-    </ul>
   </div>
+</div>
+
+<div *ngIf="!pokemon">
+  <img src="../../assets/images/error.gif">
 </div>

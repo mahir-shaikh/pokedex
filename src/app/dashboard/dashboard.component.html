@@ -1,9 +1,9 @@
-<h3>Top Pokemons</h3>
+<h3>Pokemon of the day!!!</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let pokemon of pokemons" class="col-1-4"
-      routerLink="/detail/{{pokemon.name}}">
+  <a class="col-1-4"
+      routerLink="/detail/{{PokemonOfTheDay.name}}" *ngIf="PokemonOfTheDay">
     <div class="module pokemon">
-      <h4>{{pokemon.name}}</h4>
+      <h4>{{PokemonOfTheDay?.name}}</h4>
     </div>
   </a>
 </div>
