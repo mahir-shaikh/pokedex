@@ -5,16 +5,12 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 
-
 @Injectable({ providedIn: 'root' })
 export class PokemonService {
-  private ListOfPokemons;
+  private ListOfPokemons: [];
   
   public set SetListOfPokemons(v) {
     this.ListOfPokemons = v;
-  }
-  public get GetListOfPokemons(){
-    return this.ListOfPokemons;
   }
   
 
@@ -33,6 +29,19 @@ export class PokemonService {
     return this.http.get<any[]>(this.dataUrl + 'pokemon?limit=964')      
   }
 
+  GetListOfPokemons(){
+    return new Promise((resolve, reject)=>{
+      if(this.ListOfPokemons){
+        resolve(this.ListOfPokemons)
+      }else{
+        this.getPokemons().subscribe((response)=>{
+          this.SetListOfPokemons = response.results;
+          resolve(this.ListOfPokemons)
+        })
+      }
+    })
+  }
+
   /** GET hero by id. Return `undefined` when id not found */
   getHeroNo404<Data>(id: number): Observable<any> {
     const url = `${this.dataUrl}/?id=${id}`;
@@ -44,11 +53,21 @@ export class PokemonService {
   }
 
   /** GET hero by name. Will 404 if id not found */
-  getPokemon(name): Observable<any> {
-    const url = `${this.dataUrl}/${name}`;
-    return this.http.get<any>(url).pipe(
-      catchError(this.handleError<any>(`getPokemon id=${name}`))
-    );
+  getPokemon(name): Promise<any> {
+    return new Promise((resolve, reject)=>{
+      let result = this.ListOfPokemons.find(obj => {
+        return obj['name'] == name;
+      })
+      if(result){
+        const url = result['url'];
+        this.http.get(url).toPromise().then(res=>{
+          resolve(res)
+        })
+      }else{
+        resolve(null)
+      }
+
+    })
   }
 
   /**

@@ -34,21 +34,16 @@ export class PokemonSearchComponent implements OnInit {
       this.filteredPokemons = []
     } // when nothing has typed
 
-    
+
     this.filteredPokemons = Object.assign([], this.pokemons).filter(
       item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
     )
   }
 
   getPokemons(): void {
-    if(this.pokemonService.GetListOfPokemons != undefined){
-      this.pokemons = this.pokemonService.GetListOfPokemons;
-    }else{
-      this.pokemonService.getPokemons().subscribe(pokemons => {
-        this.pokemons = pokemons.results;
-        this.pokemonService.SetListOfPokemons = pokemons.results;
-      });
-    }
+    this.pokemonService.GetListOfPokemons().then((response: []) => {
+      this.pokemons = response;
+    });
   }
 
 }

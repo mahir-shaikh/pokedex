@@ -23,9 +23,10 @@ export class PokemonDetailComponent implements OnInit {
   }
 
   getPokemon(): void {
-    const name = +this.route.snapshot.paramMap.get('name');
-    this.pokemonService.getPokemon(name)
-      .subscribe(pokemon => this.pokemon = pokemon);
+    const name = this.route.snapshot.paramMap.get('name');
+    this.pokemonService.getPokemon(name).then((pokemon)=>{
+      this.pokemon = pokemon
+    })
   }
 
   goBack(): void {

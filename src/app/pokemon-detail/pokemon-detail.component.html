@@ -1,9 +1,36 @@
 <div *ngIf="pokemon">
   <h2>{{pokemon.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{pokemon.id}}</div>
-  <div>
-    <label>name: {{pokemon.name}}
-    </label>
-  </div>
   <button (click)="goBack()">go back</button>
+  <div>
+    <img [src]="pokemon.sprites.front_default">
+    <label>Name: {{pokemon.name}}</label>
+    <label>Weight: {{pokemon.weight}}</label>
+    <label>Height: {{pokemon.height}}</label>
+    <label>Base Experience: {{pokemon.base_experience}}</label>
+
+
+    Stats:
+    <div class="row">
+      <div class="col">Name</div>
+      <div class="col">Stat</div>
+    </div>
+    <div class="row" *ngFor="let statObj of pokemon.stats">
+      <div class="col">{{statObj?.stat?.name}}</div>
+      <div class="col">{{statObj?.base_stat}}</div>
+    </div>
+
+    Abilities:
+    <ul>
+      <li *ngFor="let abilityObj of pokemon.abilities">
+        {{abilityObj?.ability?.name}}
+      </li>
+    </ul>
+
+    Type:
+    <ul>
+      <li *ngFor="let typeObj of pokemon.types">
+        {{typeObj?.type?.name}}
+      </li>
+    </ul>
+  </div>
 </div>
