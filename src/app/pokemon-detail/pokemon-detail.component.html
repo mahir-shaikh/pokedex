@@ -1,7 +1,17 @@
-<button (click)="goBack()">go back</button>
-<div *ngIf="loading">
-  Loading...
+<app-header></app-header>
+<button class="back-arrow" (click)="goBack()">
+  <img class="back-arrow-icon" src="../../assets/images/Back-Arrow-Icon.png">
+</button>
+<div class="loading-container" *ngIf="loading">
+  <img class="loading-img" src="../../assets/images/loading2.gif">
+  <div>Loading...</div>
 </div>
+
+<div class="error-container" *ngIf="error">
+  <img src="../../assets/images/error2.gif">
+</div>
+
+
 <div *ngIf="pokemon">
   <div class="card-wrapper">
     <div class="top-section">
@@ -79,6 +89,3 @@
   </div>
 </div>
 
-<div *ngIf="error">
-  <img src="../../assets/images/error.gif">
-</div>

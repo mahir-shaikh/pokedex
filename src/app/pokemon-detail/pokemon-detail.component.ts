@@ -27,12 +27,16 @@ export class PokemonDetailComponent implements OnInit {
   getPokemon(): void {
     const name = this.route.snapshot.paramMap.get('name');
     this.pokemonService.getPokemon(name).then((pokemon)=>{
-      if(pokemon){
-        this.pokemon = pokemon
-      }else{
-        this.error = true;
-      }
-      this.loading = false;
+      //adding timeout so that loading animation is visible ;P
+      setTimeout(() => {
+        if(pokemon){
+          this.pokemon = pokemon
+        }else{
+          //we can redirect back to inital page on refresh but the error image is amazing.
+          this.error = true;
+        }
+        this.loading = false;        
+      }, 1000);
     })
   }
 
