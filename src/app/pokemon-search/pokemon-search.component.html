@@ -1,13 +1,28 @@
-<div id="search-component">
-  <h4><label for="search-box">Pokemon Search</label></h4>
+<div id="search-component" class="search-component">
+  <!-- <h4><label for="search-box">Pokemon Search</label></h4> -->
 
-  <input #searchBox id="search-box" (input)="filterItem(searchBox.value)" />
+  <div class="search-field">
+    <input class="form-control" 
+      [(ngModel)]="selected" 
+      [typeahead]="filteredPokemons" 
+      [typeaheadOptionsInScrollableView]="7"
+      [typeaheadOptionsLimit]="10" 
+      typeaheadScrollable="true" 
+      [typeaheadMinLength]="1" 
+      adaptivePosition="true"
+      container=".search-field"
+      placeholder="Search for a Pokemon...">
+  </div>
+  <div class="search-btn-container">
+    <button class="" (click)="searchPokemon()">Search</button>
+  </div>
+  <!-- <input #searchBox id="search-box" (input)="filterItem(searchBox.value)" /> -->
 
-  <ul class="search-result">
+  <!-- <ul class="search-result">
     <li *ngFor="let pokemon of filteredPokemons" >
       <a routerLink="/detail/{{pokemon.name}}">
         {{pokemon.name}}
       </a>
     </li>
-  </ul>
+  </ul> -->
 </div>
