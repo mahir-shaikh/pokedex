@@ -24,11 +24,12 @@ export class DashboardComponent implements OnInit {
   }
   
   getPotD(){
-    //check if already exists
     let potd = localStorage.getItem("PokemonOfTheDay");
     let storedDay = localStorage.getItem("date")
     let currentDay = new Date().toLocaleDateString();
-
+    
+    //get new random pokemon of the day only if it is new user(no localstorage value)
+    //or if it is existing user but day has changed
     if(potd == undefined || (potd != undefined && storedDay != currentDay)){
       potd = this.getRandomIntInclusive(0, this.pokemons.length);
       localStorage.setItem("PokemonOfTheDay", potd)

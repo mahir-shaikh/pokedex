@@ -7,10 +7,12 @@ import { PokemonService }  from '../pokemon.service';
 @Component({
   selector: 'app-pokemon-detail',
   templateUrl: './pokemon-detail.component.html',
-  styleUrls: [ './pokemon-detail.component.css' ]
+  styleUrls: [ './pokemon-detail.component.styl' ]
 })
 export class PokemonDetailComponent implements OnInit {
   @Input() pokemon;
+  private loading = true;
+  private error = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +27,12 @@ export class PokemonDetailComponent implements OnInit {
   getPokemon(): void {
     const name = this.route.snapshot.paramMap.get('name');
     this.pokemonService.getPokemon(name).then((pokemon)=>{
-      this.pokemon = pokemon
+      if(pokemon){
+        this.pokemon = pokemon
+      }else{
+        this.error = true;
+      }
+      this.loading = false;
     })
   }
 

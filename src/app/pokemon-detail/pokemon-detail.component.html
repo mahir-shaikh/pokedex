@@ -1,7 +1,8 @@
 <button (click)="goBack()">go back</button>
+<div *ngIf="loading">
+  Loading...
+</div>
 <div *ngIf="pokemon">
-  <h2>{{pokemon.name | uppercase}} Details</h2>
-
   <div class="card-wrapper">
     <div class="top-section">
       <h2 class="pokemon-name">
@@ -52,7 +53,7 @@
                 Abilities
               </div>
               <ul>
-                <li class="col col-12 data-value" *ngFor="let abilityObj of pokemon.abilities">
+                <li class="col col-12 data-info" *ngFor="let abilityObj of pokemon.abilities">
                   {{abilityObj?.ability?.name}}
                 </li>
               </ul>
@@ -62,9 +63,9 @@
         <tab heading="Stats">
           <div class="tab-data">
             <div class="row stat-row" *ngFor="let statObj of pokemon.stats">
-              <div class="col data-label">{{statObj?.stat?.name}}</div>
-              <div class="col data-value">{{statObj?.base_stat}}</div>
-              <div class="col data-chart">
+              <div class="col-5 data-label">{{statObj?.stat?.name}}</div>
+              <div class="col-2 data-value">{{statObj?.base_stat}}</div>
+              <div class="col-5 data-chart">
                 <progressbar max="100" 
                 [value]="statObj?.base_stat" 
                 [type]="statObj?.base_stat <= 35 ? 'danger' : statObj?.base_stat <= 75 ? 'warning' :  'success'" 
@@ -78,6 +79,6 @@
   </div>
 </div>
 
-<div *ngIf="!pokemon">
+<div *ngIf="error">
   <img src="../../assets/images/error.gif">
 </div>

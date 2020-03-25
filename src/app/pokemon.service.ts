@@ -55,18 +55,21 @@ export class PokemonService {
   /** GET hero by name. Will 404 if id not found */
   getPokemon(name): Promise<any> {
     return new Promise((resolve, reject)=>{
-      let result = this.ListOfPokemons.find(obj => {
-        return obj['name'] == name;
-      })
-      if(result){
-        const url = result['url'];
-        this.http.get(url).toPromise().then(res=>{
-          resolve(res)
+      try{
+        let result = this.ListOfPokemons.find(obj => {
+          return obj['name'] == name;
         })
-      }else{
-        resolve(null)
+        if(result){
+          const url = result['url'];
+          this.http.get(url).toPromise().then(res=>{
+            resolve(res)
+          })
+        }else{
+          resolve(null)
+        }
+      }catch(e){
+        resolve(null);
       }
-
     })
   }
 
