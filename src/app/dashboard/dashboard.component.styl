@@ -1,40 +1,61 @@
-/* DashboardComponent's private CSS styles */
-[class*='col-'] {
-  float: left;
-  padding-right: 20px;
-  padding-bottom: 20px;
-}
-[class*='col-']:last-of-type {
-  padding-right: 0;
-}
+
 a {
   text-decoration: none;
-}
-*, *:after, *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 }
 h3 {
   text-align: center;
   margin-bottom: 0;
+  color: #FFF
 }
 h4 {
   position: relative;
 }
 
+:host
+  display block
+  height 100%
+  width: 100%
+
+.pokeball
+  height 100%
+  position relative
+  .top-ball, .bottom-ball
+    height 50%
+  .top-ball
+    border-bottom 10px solid #000000
+    padding-bottom 40px
+    background #C32025
+  .bottom-ball
+    border-top 10px solid #000000
+    padding-top 40px
+  .center-ball
+    display block
+    height 100px
+    width 100px
+    background #fff
+    border 20px solid #000
+    border-radius 50%
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+
 .module
   padding: 20px;
-  text-align: center;
   border-radius: 20px;
   color: #607d8b;
   border 1px solid #0003
   border-radius 20px
-  box-shadow 1px 1px 3px 2px #eee
+  box-shadow 1px 2px 5px 2px #000;
   max-width: 300px;
   margin: 10px auto;
+  background url('../../assets/images/whos_that_pokemon.png')
+  background-size 100% 100%
+  transform scale(1)
+  transition transform 0.5s ease-in
   &:hover
-    cursor: pointer;
+    cursor: pointer
+    transform scale(1.05)
   .pokemon-name
     text-transform uppercase
 
@@ -42,3 +63,4 @@ h4 {
 .image-container
   .image
     height 96px
+    margin-left 15px

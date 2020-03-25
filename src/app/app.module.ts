@@ -14,6 +14,7 @@ import { DashboardComponent }   from './dashboard/dashboard.component';
 import { PokemonDetailComponent }  from './pokemon-detail/pokemon-detail.component';
 import { PokemonComponent }      from './pokemons/pokemon.component';
 import { PokemonSearchComponent }  from './pokemon-search/pokemon-search.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { PokemonSearchComponent }  from './pokemon-search/pokemon-search.compone
     DashboardComponent,
     PokemonComponent,
     PokemonDetailComponent,
-    PokemonSearchComponent
+    PokemonSearchComponent,
+    HeaderComponent
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,16 +1,22 @@
-<h3>Pokemon of the day!!!</h3>
-<div class="grid grid-pad">
-  <a class="card-wrapper"
-      routerLink="/detail/{{PokemonOfTheDay.name}}" *ngIf="PokemonOfTheDay">
-    <div class="module pokemon">
-      <h4 class="pokemon-name">{{PokemonOfTheDay?.name}}</h4>
-      <div class="image-container">
-        <img class="image" [src]="PokemonOfTheDay.sprites.front_default">
-      </div>
+<div class="pokeball">
+  <div class="top-ball">
+    <app-header></app-header>
+    <h3>Pokemon of the day!!!</h3>
+    <div class="grid grid-pad">
+      <a class="card-wrapper" routerLink="/detail/{{PokemonOfTheDay.name}}" *ngIf="PokemonOfTheDay">
+        <div class="module pokemon">
+          <!-- <h4 class="pokemon-name">{{PokemonOfTheDay?.name}}</h4> -->
+          <div class="image-container">
+            <img class="image" [src]="PokemonOfTheDay.sprites.front_default">
+          </div>
+        </div>
+      </a>
     </div>
-  </a>
-</div>
-
-<div class="">
-  <app-pokemon-search></app-pokemon-search>
+  </div>
+  <div class="center-ball"></div>
+  <div class="bottom-ball">
+    <div class="">
+      <app-pokemon-search></app-pokemon-search>
+    </div>
+  </div>
 </div>
