@@ -4,7 +4,7 @@
     <h3>Pokémon of the day!!!</h3>
     <div class="grid grid-pad">
       <a class="card-wrapper" routerLink="/detail/{{PokemonOfTheDay.name}}" *ngIf="PokemonOfTheDay">
-        <div class="module pokemon">
+        <div class="animated tada module pokemon">
           <!-- <h4 class="pokemon-name">{{PokemonOfTheDay?.name}}</h4> -->
           <div class="image-container">
             <img class="image" [src]="PokemonOfTheDay.sprites.front_default">
