@@ -1,11 +1,16 @@
 <h3>Pokemon of the day!!!</h3>
 <div class="grid grid-pad">
-  <a class="col-1-4"
+  <a class="card-wrapper"
       routerLink="/detail/{{PokemonOfTheDay.name}}" *ngIf="PokemonOfTheDay">
     <div class="module pokemon">
-      <h4>{{PokemonOfTheDay?.name}}</h4>
+      <h4 class="pokemon-name">{{PokemonOfTheDay?.name}}</h4>
+      <div class="image-container">
+        <img class="image" [src]="PokemonOfTheDay.sprites.front_default">
+      </div>
     </div>
   </a>
 </div>
 
-<app-pokemon-search></app-pokemon-search>
+<div class="">
+  <app-pokemon-search></app-pokemon-search>
+</div>

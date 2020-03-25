@@ -4,7 +4,7 @@ import { PokemonService } from '../pokemon.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.css' ]
+  styleUrls: [ './dashboard.component.styl' ]
 })
 export class DashboardComponent implements OnInit {
   pokemons = [];
@@ -35,7 +35,10 @@ export class DashboardComponent implements OnInit {
       localStorage.setItem("PokemonOfTheDay", potd)
       localStorage.setItem("date", currentDay)
     }
-    this.PokemonOfTheDay = this.pokemons[potd];
+    // this.PokemonOfTheDay = this.pokemons[potd];
+    this.pokemonService.getPokemon(this.pokemons[potd].name).then((pokemon)=>{
+      this.PokemonOfTheDay = pokemon;
+    })
   }
 
   getRandomIntInclusive(min, max) {
