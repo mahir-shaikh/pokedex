@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { PokemonSearchComponent } from './pokemon-search.component';
+import { PokemonDetailComponent } from './pokemon-detail.component';
 
-describe('PokemonSearchComponent', () => {
-  let component: PokemonSearchComponent;
-  let fixture: ComponentFixture<PokemonSearchComponent>;
+describe('PokemonDetailComponent', () => {
+  let component: PokemonDetailComponent;
+  let fixture: ComponentFixture<PokemonDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PokemonSearchComponent]
+      declarations: [PokemonDetailComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PokemonSearchComponent);
+    fixture = TestBed.createComponent(PokemonDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -28,7 +28,6 @@ describe('PokemonSearchComponent', () => {
 
   //should call service
 
-  //should call function
+  //should call function when button go back is clicked
 
-  //should have atleast one value for POKD
 });
