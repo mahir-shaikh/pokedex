@@ -1,9 +1,0 @@
-<h2>My Pokemons</h2>
-
-<ul class="pokemons">
-  <li *ngFor="let pokemon of pokemons; let i=index">
-    <a routerLink="/detail/{{pokemon.name}}">
-      <span class="badge">{{i + 1}}</span> {{pokemon.name}}
-    </a>
-  </li>
-</ul>

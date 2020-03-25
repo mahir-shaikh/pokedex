@@ -13,7 +13,6 @@ import { TabsModule, ProgressbarModule, TypeaheadModule }     from 'ngx-bootstra
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { PokemonDetailComponent }  from './pokemon-detail/pokemon-detail.component';
-import { PokemonComponent }      from './pokemons/pokemon.component';
 import { PokemonSearchComponent }  from './pokemon-search/pokemon-search.component';
 import { HeaderComponent } from './header/header.component';
 
@@ -38,7 +37,6 @@ import { HeaderComponent } from './header/header.component';
   declarations: [
     AppComponent,
     DashboardComponent,
-    PokemonComponent,
     PokemonDetailComponent,
     PokemonSearchComponent,
     HeaderComponent
